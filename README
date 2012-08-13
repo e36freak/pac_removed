@@ -1,0 +1,35 @@
+usage: pac_removed -- [OPTIONS] LOGFILE
+
+The '--' is required, so AWK itself doesn't read the options
+
+Parses LOGFILE, in the standard pacman.log format, listing all removed
+packages that have not been reinstalled. LOGFILE must be in the original
+sorted format.
+
+ Options:
+  -d, --date DATE         Only show files removed after DATE. DATE is an epoch
+                          time.
+  -t, --time TIME         Only show files removed within the last TIME. Valid
+                          values for TIME are explained below
+  -q, --quiet             Do not show timestamps and versions in the output
+  -0, --null              Like --quiet, but separate the package names with NUL
+                          bytes instead of newlines
+  -c, --color             Colorize output
+  -f, --format FORMAT     Use FORMAT for the timestamp outputs. FORMAT is
+                          anything valid for strftime(3)
+  -i, --include PATTERN   Only include packages that match the extended regular
+                          expression PATTERN. Can be used multiple times
+  -e, --exclude PATTERN   Do not include packages that match the extended
+                          regular expression PATTERN. Can be used multiple times
+  -h, --help              Display this help and exit
+
+The --date and --time options are mutually exclusive, and may only be used
+once. If multiple dates/times are given, only the last one passed will be
+used.
+
+TIME may be a positive integer, in which case it is seconds. It may also have
+one of the following suffixes, case-insensitive:
+  s    seconds
+  m    minutes
+  h    hours
+  d    days

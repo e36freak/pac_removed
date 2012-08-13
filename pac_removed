@@ -1,12 +1,12 @@
 #!/usr/bin/gawk -f
 
-# usage: pac_removed -- [OPTIONS] LOGFILE
+# usage: pac_removed -- [OPTIONS] [LOGFILE]
 #
 # The '--' is required, so AWK itself doesn't read the options
 #
 # Parses LOGFILE, in the standard pacman.log format, listing all removed
 # packages that have not been reinstalled. LOGFILE must be in the original
-# sorted format.
+# sorted format. If LOGFILE is not provided, uses /var/log/pacman.log
 #
 #  Options:
 #   -d, --date DATE         Only show files removed after DATE. DATE is an epoch
@@ -229,11 +229,11 @@ function shell_esc(str) {
 # print usage information
 function usage() {
   printf("%s\n\n%s\n\n%s\n%s\n%s\n\n",
-"usage: pac_removed -- [OPTIONS] LOGFILE",
+"usage: pac_removed -- [OPTIONS] [LOGFILE]",
 "The '--' is required, so AWK itself doesn't read the options",
 "Parses LOGFILE, in the standard pacman.log format, listing all removed",
 "packages that have not been reinstalled. LOGFILE must be in the original",
-"sorted format." \
+"sorted format. If LOGFILE is not provided, uses /var/log/pacman.log" \
 ) > "/dev/stderr";
   printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n",
 " Options:",
@@ -379,6 +379,11 @@ BEGIN {
   # if --color was used, and --quiet was not, set colors
   if (color && !quiet) {
     set_cols();
+  }
+
+  # if there are no args left, add /var/log/pacman.log
+  if (optind >= ARGC) {
+    ARGV[ARGC++] = "/var/log/pacman.log";
   }
 }
 

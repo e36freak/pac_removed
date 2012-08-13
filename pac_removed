@@ -35,12 +35,13 @@
 #                           time.
 #   -t, --time TIME         Only show files removed within the last TIME. Valid
 #                           values for TIME are explained below
-#   -q, --quiet             Do not show timestamps, versions, or color
+#   -q, --quiet             Do not show timestamps, versions, or color, even if
+#                           --color=always was provided
 #   -0, --null              Separate the package names with NUL bytes instead of
 #                           newlines
 #   -f, --format FORMAT     Use FORMAT for the timestamp outputs. FORMAT is
 #                           anything valid for strftime(3)
-#   -c, --color             Colorize output
+#   -c, --color[=WHEN]      Colorize output. WHEN is always, auto, or never
 #   -i, --include PATTERN   Only include packages that match the extended regular
 #                           expression PATTERN. Can be used multiple times
 #   -e, --exclude PATTERN   Do not include packages that match the extended
@@ -78,6 +79,7 @@
 ## the ogrep script for a POSIX example: https://github.com/e36freak/ogrep
 function getopts(optstring, longarr,    opt, trimmed, hasarg, repeat) {
   hasarg = repeat = 0;
+  optarg = "";
   # increment optind
   optind++;
 
@@ -174,6 +176,19 @@ function getopts(optstring, longarr,    opt, trimmed, hasarg, repeat) {
   return opt;
 }
 
+## usage: isatty(fd)
+## Checks if "fd" is open on a tty. Returns 1 if so, 0 if not, and -1 if an
+## error occurs
+function isatty(fd) {
+  # make sure fd is an int
+  if (fd !~ /^[0-9]+$/) {
+    return -1;
+  }
+
+  # actually test
+  return !system("test -t " fd);
+}
+
 ## usage: isint(string)
 ## returns 1 if "string" is a valid integer, otherwise 0
 function isint(str) {
@@ -184,7 +199,7 @@ function isint(str) {
   return 1;
 }
 
-## usage: set_cols() **
+## usage: set_cols()
 ##   sets the following variables with tput. printing them will format any
 ##   text afterwards. colors and formats are:
 ##     bold - bold text (can be combined with a color)
@@ -249,16 +264,17 @@ function usage() {
 "packages that have not been reinstalled. LOGFILE must be in the original",
 "sorted format. If LOGFILE is not provided, uses /var/log/pacman.log" \
 ) > "/dev/stderr";
-  printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n",
+  printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n",
 " Options:",
 "  -d, --date DATE         Only show files removed after DATE. DATE is an epoch",
 "                          time.",
 "  -t, --time TIME         Only show files removed within the last TIME. Valid",
 "                          values for TIME are explained below",
-"  -q, --quiet             Do not show timestamps and versions in the output",
+"  -q, --quiet             Do not show timestamps, versions, or color, even if",
+"                          --color=always was provided",
 "  -0, --null              Separate the package names with NUL bytes instead of",
 "                          newlines",
-"  -c, --color             Colorize output",
+"  -c, --color[=WHEN]      Colorize output. WHEN is always, auto, or never",
 "  -f, --format FORMAT     Use FORMAT for the timestamp outputs. FORMAT is",
 "                          anything valid for strftime(3)",
 "  -i, --include PATTERN   Only include packages that match the extended regular",
@@ -338,7 +354,35 @@ BEGIN {
 
       # -c, --color
       case "c":
-        color = 1; break;
+        # if WHEN was provided...
+        if (length(optarg)) {
+          switch(optarg) {
+            case "always":
+              color = 1; break;
+            case "auto":
+              if (isatty(1)) {
+                color = 1;
+              } else {
+                color = 0;
+              }
+              break;
+            case "never":
+              color = 0; break;
+            default:
+              printf("`%s' is not valid for `%s'\n",
+                     optarg, optname) > "/dev/stderr";
+              err = toexit = 1; exit;
+          }
+
+        # otherwise, assume auto
+        } else {
+          if (isatty(1)) {
+            color = 1;
+          } else {
+            color = 0;
+          }
+        }
+        break;
 
       # -f, --format
       case "f":
@@ -390,8 +434,13 @@ BEGIN {
     ORS = "\0";
   }
 
+  # if --quiet was used, make sure color is off
+  if (quiet) {
+    color = 0;
+  }
+
   # if --color was used, and --quiet was not, set colors
-  if (color && !quiet) {
+  if (color) {
     set_cols();
   }
 

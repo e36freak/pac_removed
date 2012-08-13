@@ -1,35 +1,224 @@
-usage: pac_removed -- [OPTIONS] [LOGFILE]
-
-The '--' is required, so AWK itself doesn't read the options
-
-Parses LOGFILE, in the standard pacman.log format, listing all removed
-packages that have not been reinstalled. LOGFILE must be in the original
-sorted format. If LOGFILE is not provided, uses /var/log/pacman.log
-
- Options:
-  -d, --date DATE         Only show files removed after DATE. DATE is an epoch
-                          time.
-  -t, --time TIME         Only show files removed within the last TIME. Valid
-                          values for TIME are explained below
-  -q, --quiet             Do not show timestamps and versions in the output
-  -0, --null              Like --quiet, but separate the package names with NUL
-                          bytes instead of newlines
-  -c, --color             Colorize output
-  -f, --format FORMAT     Use FORMAT for the timestamp outputs. FORMAT is
-                          anything valid for strftime(3)
-  -i, --include PATTERN   Only include packages that match the extended regular
-                          expression PATTERN. Can be used multiple times
-  -e, --exclude PATTERN   Do not include packages that match the extended
-                          regular expression PATTERN. Can be used multiple times
-  -h, --help              Display this help and exit
-
-The --date and --time options are mutually exclusive, and may only be used
-once. If multiple dates/times are given, only the last one passed will be
-used.
-
-TIME may be a positive integer, in which case it is seconds. It may also have
-one of the following suffixes, case-insensitive:
-  s    seconds
-  m    minutes
-  h    hours
-  d    days
+[2010-09-20 14:38] virtualbox-ose 3.2.8-3
+[2010-09-24 14:33] samba 3.5.5-1
+[2010-10-01 16:43] samba-git 20100924-1
+[2010-10-04 11:56] gir-repository 0.6.6-0.20100311
+[2010-10-15 12:42] flashplugin-prerelease 10.2.161.23-1
+[2010-10-20 15:45] lib32-libgl 7.8.2-5
+[2010-10-21 14:22] libdjvu 3.5.22-3
+[2010-10-26 11:03] virtualbox_bin 3.2.8-4
+[2010-11-22 12:20] fam 2.7.0-14
+[2010-11-29 10:54] libusb1 1.0.8-1
+[2010-12-16 11:03] pycairo 1.8.10-2
+[2010-12-27 10:59] virtualbox-ose-additions 3.2.12-1
+[2010-12-27 10:59] virtualbox-ose-additions-modules 3.2.12-1
+[2010-12-30 15:03] pacman-color 3.4.1-1
+[2010-12-30 15:25] yaourt 0.9.4.3-1
+[2011-01-05 14:37] openjdk6 6.b20_1.9.3-1
+[2011-01-11 11:40] pyqt 4.8.2-2
+[2011-01-11 11:40] sip 4.12-1
+[2011-01-28 15:11] kdegames-ksame 4.5.5-1
+[2011-02-24 12:18] util-linux-ng 2.18-4
+[2011-02-28 16:46] libjpeg 8.3.0-1
+[2011-03-04 15:18] kdegames-kjumpingcube 4.6.0-1
+[2011-03-04 15:18] kdegames-klickety 4.6.0-1
+[2011-03-04 15:18] kdegames-klines 4.6.0-1
+[2011-03-04 15:18] kdegames-kmahjongg 4.6.0-1
+[2011-03-04 15:18] kdegames-kmines 4.6.0-1
+[2011-03-04 15:18] kdegames-knetwalk 4.6.0-1
+[2011-03-04 15:18] kdegames-kolf 4.6.0-1
+[2011-03-04 15:18] kdegames-kollision 4.6.0-1
+[2011-03-04 15:18] kdegames-konquest 4.6.0-1
+[2011-03-04 15:18] kdegames-kpatience 4.6.0-1
+[2011-03-04 15:18] kdegames-kreversi 4.6.0-1
+[2011-03-04 15:18] kdegames-kshisen 4.6.0-1
+[2011-03-04 15:18] kdegames-ksirk 4.6.0-1
+[2011-03-04 15:18] kdegames-kspaceduel 4.6.0-1
+[2011-03-04 15:18] kdegames-ksquares 4.6.0-1
+[2011-03-04 15:18] kdegames-ksudoku 4.6.0-1
+[2011-03-04 15:18] kdegames-ktron 4.6.0-1
+[2011-03-04 15:18] kdegames-ktuberling 4.6.0-1
+[2011-03-04 15:18] kdegames-kubrick 4.6.0-1
+[2011-03-04 15:18] kdegames-libkmahjongg 4.6.0-1
+[2011-03-04 15:18] kdegames-lskat 4.6.0-1
+[2011-03-04 15:18] kdegames-palapeli 4.6.0-1
+[2011-03-04 15:19] akonadi 1.5.0-2
+[2011-03-04 15:19] ggz-client-libs 0.0.14.1-1
+[2011-03-04 15:19] gnugo 3.8-1
+[2011-03-04 15:19] kdebindings-python 4.6.0-2
+[2011-03-04 15:19] kdegames-bomber 4.6.0-1
+[2011-03-04 15:19] kdegames-bovo 4.6.0-1
+[2011-03-04 15:19] kdegames-granatier 4.6.0-1
+[2011-03-04 15:19] kdegames-kajongg 4.6.0-1
+[2011-03-04 15:19] kdegames-kapman 4.6.0-1
+[2011-03-04 15:19] kdegames-katomic 4.6.0-1
+[2011-03-04 15:19] kdegames-kbattleship 4.6.0-1
+[2011-03-04 15:19] kdegames-kblackbox 4.6.0-1
+[2011-03-04 15:19] kdegames-kblocks 4.6.0-1
+[2011-03-04 15:19] kdegames-kbounce 4.6.0-1
+[2011-03-04 15:19] kdegames-kbreakout 4.6.0-1
+[2011-03-04 15:19] kdegames-kdiamond 4.6.0-1
+[2011-03-04 15:19] kdegames-kfourinline 4.6.0-1
+[2011-03-04 15:19] kdegames-kgoldrunner 4.6.0-1
+[2011-03-04 15:19] kdegames-kigo 4.6.0-1
+[2011-03-04 15:19] kdegames-killbots 4.6.0-1
+[2011-03-04 15:19] kdegames-kiriki 4.6.0-1
+[2011-03-04 15:19] kdegames-libkdegames 4.6.0-1
+[2011-03-04 15:19] kdepim-runtime 4.4.10-1
+[2011-03-04 15:19] kdepimlibs 4.6.0-1
+[2011-03-04 15:19] libggz 0.0.14.1-1
+[2011-03-04 15:19] pycrypto 2.3-1
+[2011-03-04 15:19] python2-qt 4.8.3-1
+[2011-03-04 15:19] python2-sip 4.12.1-1
+[2011-03-04 15:19] qscintilla 2.4.6-8
+[2011-03-04 15:19] twisted 10.2.0-3
+[2011-03-04 15:19] zope-interface 3.5.3-2
+[2011-03-07 14:20] ghc 7.0.2-1
+[2011-03-07 14:20] haskell-mtl 2.0.1.0-1.1
+[2011-03-07 14:20] haskell-syb 0.3-1.1
+[2011-03-07 14:20] haskell-transformers 0.2.2.0-1.1
+[2011-03-07 14:20] haskell-utf8-string 0.3.6-7.1
+[2011-03-07 14:20] haskell-x11 1.5.0.0-7.2
+[2011-03-07 14:20] xmonad 0.9.2-1.2
+[2011-03-09 15:40] lib32-util-linux-ng 2.18-3
+[2011-03-11 11:45] mailx 8.1.1-7
+[2011-03-22 11:47] amarok 2.4.0-2
+[2011-03-22 11:47] liblastfm 0.3.3-2
+[2011-03-22 11:47] mysql 5.5.9-1
+[2011-03-22 11:47] qtscriptgenerator 0.1.0-4
+[2011-03-22 11:47] taglib-extras 1.0.1-1
+[2011-03-22 11:48] hyphen 2.7.1-2
+[2011-03-22 11:48] libgraphite 2.3.1-1
+[2011-03-22 11:48] lpsolve 5.5.2.0-1
+[2011-03-22 11:48] mysql-clients 5.5.9-1
+[2011-03-22 11:48] openoffice-base 3.3.0-1
+[2011-03-22 11:48] php-apache 5.3.5-2
+[2011-03-22 11:48] phpmyadmin 3.3.9.2-2
+[2011-03-22 12:58] bin32-google-earth 6.0.1.2032-2
+[2011-03-22 12:58] fahmon 2.3.99.4-3
+[2011-03-22 12:58] vim-tetris 0.52fix-3
+[2011-03-28 11:36] eggdbus 0.6-5
+[2011-03-28 11:36] package-query 0.5.1-1
+[2011-04-08 12:45] gnome-panel-bonobo 2.32.1-2
+[2011-04-08 12:45] gnome-themes 2.32.1-1
+[2011-04-08 12:45] gnome2-user-docs 2.32.0-2
+[2011-04-29 15:58] dcron 4.4-2
+[2011-05-09 13:52] heimdal 1.3.3-4
+[2011-05-31 11:27] lib32-libjpeg 8.3.0-1
+[2011-06-02 17:04] perl-test-simple 0.96-1
+[2011-06-22 10:38] lib32-heimdal 1.3.3-3
+[2011-07-20 11:21] virtualbox-guest-additions 4.0.12-1
+[2011-07-20 11:21] virtualbox-guest-modules 4.0.12-1
+[2011-07-25 11:41] kernel26 2.6.39.3-1
+[2011-07-25 11:41] kernel26-headers 2.6.39.3-1
+[2011-08-04 13:05] cyrus-sasl-plugins 2.1.23-5
+[2011-09-09 08:00] pygobject 2.28.6-1
+[2011-09-12 11:45] lib32-libtool 2.4-4
+[2011-10-11 07:28] at-spi2-core 2.0.0-1
+[2011-10-11 07:28] brltty 4.2-4
+[2011-10-11 07:28] dotconf 1.3-2
+[2011-10-11 07:28] liblouis 2.3.0-1
+[2011-10-11 07:28] orca 3.2.0-2
+[2011-10-11 07:28] pyatspi 2.2.0-1
+[2011-10-11 07:28] speech-dispatcher 0.7.1-5
+[2012-01-13 07:28] module-init-tools 3.16-3
+[2012-04-03 13:01] gnupg2 2.0.18-1
+[2012-04-09 07:50] sqlite3 3.7.11-1
+[2012-04-20 10:59] seahorse-plugins 2.30.1-3
+[2012-04-23 10:22] farsight2 0.0.31-1
+[2012-04-23 10:22] telepathy-farsight 0.0.19-1
+[2012-06-14 09:27] dbus-python 1.0.0-1
+[2012-06-14 09:27] libusb 1.0.8-2
+[2012-06-14 09:27] procps 3.2.8-5
+[2012-06-14 09:27] udev 182-1
+[2012-07-10 12:59] pyxdg 0.19-3
+[2012-07-26 08:44] dmidecode 2.11-2
+[2012-07-26 08:44] hal 0.5.14-6
+[2012-07-26 08:44] hal-info 0.20091130-1
+[2012-07-26 08:45] gnome-keyring 3.0.0-1
+[2012-07-26 08:49] ld-lsb 3-3
+[2012-07-26 08:57] cabextract 1.4-2
+[2012-07-26 08:57] lib32-acl 2.2.51-2
+[2012-07-26 08:57] lib32-alsa-lib 1.0.25-1
+[2012-07-26 08:57] lib32-alsa-plugins 1.0.25-1
+[2012-07-26 08:57] lib32-atk 2.2.0-1
+[2012-07-26 08:57] lib32-attr 2.4.46-2
+[2012-07-26 08:57] lib32-bzip2 1.0.6-1
+[2012-07-26 08:57] lib32-cairo 1.10.2-3
+[2012-07-26 08:57] lib32-curl 7.23.1-1
+[2012-07-26 08:57] lib32-db 5.1.19-1
+[2012-07-26 08:57] lib32-dbus-core 1.4.16-1
+[2012-07-26 08:57] lib32-e2fsprogs 1.42-1
+[2012-07-26 08:57] lib32-expat 2.0.1-8
+[2012-07-26 08:57] lib32-fontconfig 2.8.0-4
+[2012-07-26 08:57] lib32-freetype2 2.4.8-1
+[2012-07-26 08:57] lib32-gcc-libs 4.6.3-1
+[2012-07-26 08:57] lib32-gdk-pixbuf2 2.24.1-2
+[2012-07-26 08:57] lib32-gettext 0.18.1.1-2
+[2012-07-26 08:57] lib32-giflib 4.1.6-6
+[2012-07-26 08:57] lib32-glib2 2.30.2-3
+[2012-07-26 08:57] lib32-glibc 2.15-7
+[2012-07-26 08:57] lib32-gmp 5.0.4-1
+[2012-07-26 08:57] lib32-gnutls 3.0.14-1
+[2012-07-26 08:57] lib32-gtk2 2.24.10-1
+[2012-07-26 08:57] lib32-jack 0.121.3-1
+[2012-07-26 08:57] lib32-keyutils 1.5.5-1
+[2012-07-26 08:57] lib32-krb5 1.9.2-1
+[2012-07-26 08:57] lib32-lcms 1.19-4
+[2012-07-26 08:57] lib32-libcups 1.5.2-1
+[2012-07-26 08:57] lib32-libdrm 2.4.31-1
+[2012-07-26 08:57] lib32-libffi 3.0.10-3
+[2012-07-26 08:57] lib32-libgcrypt 1.5.0-1
+[2012-07-26 08:57] lib32-libgpg-error 1.10-1
+[2012-07-26 08:57] lib32-libice 1.0.7-2
+[2012-07-26 08:57] lib32-libjpeg-turbo 1.2.0-1
+[2012-07-26 08:57] lib32-libldap 2.4.28-1
+[2012-07-26 08:57] lib32-libltdl 2.4.2-4
+[2012-07-26 08:57] lib32-libpciaccess 0.13-1
+[2012-07-26 08:57] lib32-libpng 1.5.9-2
+[2012-07-26 08:57] lib32-libsm 1.2.0-2
+[2012-07-26 08:57] lib32-libssh2 1.4.0-1
+[2012-07-26 08:57] lib32-libtiff 4.0.0-1
+[2012-07-26 08:57] lib32-libx11 1.4.99.1-1
+[2012-07-26 08:57] lib32-libxau 1.0.6-3
+[2012-07-26 08:57] lib32-libxcb 1.8-2
+[2012-07-26 08:57] lib32-libxcomposite 0.4.3-2
+[2012-07-26 08:57] lib32-libxcursor 1.1.12-1
+[2012-07-26 08:57] lib32-libxdamage 1.1.3-4
+[2012-07-26 08:57] lib32-libxdmcp 1.1.0-2
+[2012-07-26 08:57] lib32-libxext 1.3.0-1
+[2012-07-26 08:57] lib32-libxfixes 5.0-1
+[2012-07-26 08:57] lib32-libxft 2.2.0-2
+[2012-07-26 08:57] lib32-libxi 1.5.99.3-1
+[2012-07-26 08:57] lib32-libxinerama 1.1.1-2
+[2012-07-26 08:57] lib32-libxml2 2.7.8-2
+[2012-07-26 08:57] lib32-libxrandr 1.3.2-1
+[2012-07-26 08:57] lib32-libxrender 0.9.6-5
+[2012-07-26 08:57] lib32-libxt 1.1.1-2
+[2012-07-26 08:57] lib32-libxv 1.0.6-2
+[2012-07-26 08:57] lib32-libxvmc 1.0.6-4
+[2012-07-26 08:57] lib32-libxxf86dga 1.1.2-1
+[2012-07-26 08:57] lib32-libxxf86vm 1.1.1-2
+[2012-07-26 08:57] lib32-mesa 8.0.1-1
+[2012-07-26 08:57] lib32-mpg123 1.14.3-1
+[2012-07-26 08:57] lib32-ncurses 5.9-1
+[2012-07-26 08:57] lib32-nettle 2.4-3
+[2012-07-26 08:57] lib32-nspr 4.8.9-1
+[2012-07-26 08:57] lib32-nss 3.12.11-1
+[2012-07-26 08:57] lib32-nvidia-utils 295.20-1
+[2012-07-26 08:57] lib32-openal 1.13-3
+[2012-07-26 08:57] lib32-openssl 1.0.0.g-1
+[2012-07-26 08:57] lib32-p11-kit 0.11-1
+[2012-07-26 08:57] lib32-pango 1.29.4-3
+[2012-07-26 08:57] lib32-pcre 8.30-1
+[2012-07-26 08:57] lib32-pixman 0.24.4-1
+[2012-07-26 08:57] lib32-readline 6.2.002-1
+[2012-07-26 08:57] lib32-sqlite3 3.7.10-1
+[2012-07-26 08:57] lib32-util-linux 2.21-1
+[2012-07-26 08:57] lib32-v4l-utils 0.8.6-1
+[2012-07-26 08:57] lib32-zlib 1.2.6-1
+[2012-07-26 08:57] nspluginwrapper 1.4.4-2.1
+[2012-07-26 08:57] wine 1.4rc6-1
+[2012-07-26 08:57] wine_gecko 1.4-1
+[2012-07-26 08:57] winetricks 20120308-1
+[2012-07-26 08:57] xorg-xmessage 1.0.3-2
+[2012-08-13 07:40] kdemultimedia-kioslave 4.8.4-2

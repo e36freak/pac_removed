@@ -240,14 +240,6 @@ function set_cols() {
   close(cmd);
 }
 
-## usage: shell_esc(string)
-## returns the string escaped so that it can be used in a shell command
-function shell_esc(str) {
-  gsub(/'/, "'\\''", str);
-
-  return "'" str "'";
-}
-
 # print usage information
 function usage() {
   printf("%s\n\n%s\n\n%s\n%s\n%s\n\n",

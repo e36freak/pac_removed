@@ -1,10 +1,10 @@
-usage: pac_removed -- [OPTIONS] LOGFILE
+usage: pac_removed -- [OPTIONS] [LOGFILE]
 
 The '--' is required, so AWK itself doesn't read the options
 
 Parses LOGFILE, in the standard pacman.log format, listing all removed
 packages that have not been reinstalled. LOGFILE must be in the original
-sorted format.
+sorted format. If LOGFILE is not provided, uses /var/log/pacman.log
 
  Options:
   -d, --date DATE         Only show files removed after DATE. DATE is an epoch

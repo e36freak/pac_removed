@@ -14,8 +14,8 @@
 #   -t, --time TIME         Only show files removed within the last TIME. Valid
 #                           values for TIME are explained below
 #   -q, --quiet             Do not show timestamps, versions, or color
-#   -0, --null              Like --quiet, but separate the package names with NUL
-#                           bytes instead of newlines
+#   -0, --null              Separate the package names with NUL bytes instead of
+#                           newlines
 #   -f, --format FORMAT     Use FORMAT for the timestamp outputs. FORMAT is
 #                           anything valid for strftime(3)
 #   -c, --color             Colorize output
@@ -242,8 +242,8 @@ function usage() {
 "  -t, --time TIME         Only show files removed within the last TIME. Valid",
 "                          values for TIME are explained below",
 "  -q, --quiet             Do not show timestamps and versions in the output",
-"  -0, --null              Like --quiet, but separate the package names with NUL",
-"                          bytes instead of newlines",
+"  -0, --null              Separate the package names with NUL bytes instead of",
+"                          newlines",
 "  -c, --color             Colorize output",
 "  -f, --format FORMAT     Use FORMAT for the timestamp outputs. FORMAT is",
 "                          anything valid for strftime(3)",
@@ -471,10 +471,10 @@ END {
     if (quiet) {
       print package;
     } else if (color) {
-      printf("%s[%s]%s %s%s%s %s%s%s\n", bold blue, time, reset, bold, package,
-             reset, bold green, versions[package], reset);
+      printf("%s[%s]%s %s%s%s %s%s%s%s", bold blue, time, reset, bold, package,
+             reset, bold green, versions[package], reset, ORS);
     } else {
-      printf("[%s] %s %s\n", time, package, versions[package]);
+      printf("[%s] %s %s%s", time, package, versions[package], ORS);
     }
   }
 }
